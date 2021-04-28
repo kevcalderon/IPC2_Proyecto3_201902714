@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<EVENTOS>
+	<EVENTO>
+        Guatemala, 25/04/2021
+        Reportado por: "Nombre Empleado 1" xx@gmail.com
+        Usuarios afectados: "123@hotmail.com", 55@gmail.com
+        Error: 20001 - Desbordamiento de búfer dememoria RAM en el servidor de correo electrónico.
+	</EVENTO>
+    <EVENTO>
+        Guatemala, 10/05/2021
+        Reportado por: demo@gmail.com
+        Usuarios afectados: 0000@hotmail.com
+        Error: 505 - Mal uso de memoria ram.
+	</EVENTO>
+    <EVENTO>
+        Guatemala, 10/05/2021
+        Reportado por: archivo@gmail.com
+        Usuarios afectados: "admin@kasa.com"
+        Error: 404 - Falta datos para la memoria.
+	</EVENTO>
+</EVENTOS>
