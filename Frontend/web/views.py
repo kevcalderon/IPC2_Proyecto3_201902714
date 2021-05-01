@@ -3,6 +3,8 @@ from xml.dom import minidom
 from django.core.files.storage import FileSystemStorage
 import sys
 from . import controlador
+import json
+import requests
 
 # from web.controladorxml import readxml
 
@@ -14,7 +16,6 @@ def index(request):
     context = {}
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        # textArea = request.FILES['document'].read()
         ruta = uploaded_file.name
         fs =  FileSystemStorage()
         name = fs.save(ruta, uploaded_file)
@@ -37,9 +38,21 @@ def index(request):
 
         controlador.xmlToJson(rutaAbs)
 
+
     return render(request, 'index.html', context)
 
 
+def enviar(request):
+    if request.method == "POST":
+        url = 'http://127.0.0.1:5000/enviar'
+        ruta = "C:\\Users\\compu\\Desktop\\IPC2 - 2.0\\PROYECTO3\\Frontend\\media\\data.json"
+        # data = json.loads(ruta)
+        with open(ruta, 'r') as j:
+            contents = json.loads(j.read())
+            # print(contents)
+        response = requests.post(url, json=contents)
+        print("Informacion enviada al api :D")
+        return render(request, 'index.html')
 
 
-        
+       

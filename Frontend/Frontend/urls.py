@@ -22,8 +22,9 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('index/', views.index)
-    # path('', views.upload)
+    path('index/', views.index),
+    path('enviar/', views.enviar)
+    
 ]
 
 if settings.DEBUG:
