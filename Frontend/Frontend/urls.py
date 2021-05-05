@@ -23,7 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('index/', views.index),
-    path('enviar/', views.enviar)
+    path('enviar/', views.enviar),
+    path('consulta/', views.consulta),
+    path('filtroFecha/', views.filtroFecha),
+    path('filtroCodigo/', views.filtroCodigo)
     
 ]
 

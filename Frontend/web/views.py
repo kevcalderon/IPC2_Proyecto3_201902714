@@ -10,6 +10,32 @@ import requests
 
 
 rutaAbs = ""
+def filtroFecha(request):
+    fecha = {}
+    
+    if request.method == 'GET':
+        listfechas = []
+        direccion = "http://127.0.0.1:5000/mostrar"
+        response = requests.get(direccion)
+        data = response.json()
+        obj = json.loads(data)
+        
+        for estadistica in obj:
+            try:
+                for x in range(0,100):
+                    key = obj[estadistica]['ESTADISTICA'][x]['FECHA']
+                    print(key)
+                    listfechas.append(key)
+            except IndexError:
+                pass
+        fecha['fecha'] = listfechas
+    
+    return render(request, 'fecha.html', context={"fecha": fecha})
+
+
+def filtroCodigo(request):
+    return render(request, 'codigo.html')
+
 
 # Create your views here.
 def index(request):
@@ -55,4 +81,18 @@ def enviar(request):
         return render(request, 'index.html')
 
 
-       
+
+def consulta(request):
+    context1 = {}
+    if request.method == "GET":
+        url = ruta = "C:\\Users\\compu\\Desktop\\IPC2 - 2.0\\PROYECTO3\\Frontend\\media\\estadistica.xml"
+        textAreaEstadistica = ""
+        with open(url, 'r', encoding='utf-8') as f:
+            lineas = f.readlines()
+
+            for file in lineas:
+                textAreaEstadistica = textAreaEstadistica + file    
+            print(textAreaEstadistica)
+        context1['url2'] = textAreaEstadistica
+
+    return render(request, 'index.html', context1)  
