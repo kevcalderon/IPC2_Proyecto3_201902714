@@ -26,7 +26,8 @@ urlpatterns = [
     path('enviar/', views.enviar),
     path('consulta/', views.consulta),
     path('filtroFecha/', views.filtroFecha),
-    path('filtroCodigo/', views.filtroCodigo)
+    path('filtroCodigo/', views.filtroCodigo),
+    path('documentacion/', views.documentacion)
     
 ]
 

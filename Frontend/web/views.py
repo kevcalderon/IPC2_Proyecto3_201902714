@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from xml.dom import minidom
 from django.core.files.storage import FileSystemStorage
+from django.http import FileResponse
 import sys
 from . import controlador
 import json
@@ -80,6 +81,12 @@ def enviar(request):
         print("Informacion enviada al api :D")
         return render(request, 'index.html')
 
+
+def documentacion(request):
+    
+    url = "C:\\Users\\compu\\Desktop\\IPC2 - 2.0\\PROYECTO3\\Documentacion\\documentacionProyecto3.pdf"
+    response = FileResponse(open(url, 'rb'), content_type='application/pdf')
+    return response
 
 
 def consulta(request):

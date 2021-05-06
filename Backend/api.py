@@ -64,11 +64,12 @@ def filtroFecha():
         ruta = "C:\\Users\\compu\\Desktop\\IPC2 - 2.0\\PROYECTO3\\Frontend\\media\\estadistica.xml"
         with open(ruta, 'r') as myfile:
             obj = xmltodict.parse(myfile.read())
-            # print(json.dumps(obj))
-
-        
+            # print(json.dumps(obj))        
         return jsonify(json.dumps(obj))
             
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
