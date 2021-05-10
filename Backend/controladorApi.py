@@ -186,8 +186,8 @@ def createEstadisticaXML(listaEventos):
                                 else:
                                     listaTemp3.append(x.codigo)
                                     error = ET.SubElement(errores, "ERROR")
-                                    correo = ET.SubElement(errores, "CODIGO").text=str(x.codigo)
-                                    cantidad = ET.SubElement(errores, "CANTIDAD_MENSAJES").text=str(cant2)
+                                    correo = ET.SubElement(error, "CODIGO").text=str(x.codigo)
+                                    cantidad = ET.SubElement(error, "CANTIDAD_MENSAJES").text=str(cant2)
 
             myData = prettify(root)
             f = open(ruta+'estadistica.xml', 'w')

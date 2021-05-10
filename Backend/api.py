@@ -69,7 +69,84 @@ def filtroFecha():
             
 
 
+@app.route('/mostrarCodigo', methods=['GET'])
+def datosCodigo():
+    if request.method == 'GET':
+        dataCode = {}
+        dataCode['codigo'] = []
+        temp = list()
+        ruta = "C:\\Users\\compu\\Desktop\\IPC2 - 2.0\\PROYECTO3\\Frontend\\media\\estadistica.xml"
+        archivo = minidom.parse(ruta)
 
+        estadistica = archivo.getElementsByTagName('ESTADISTICA')
+
+        for x in estadistica:
+            errores = archivo.getElementsByTagName("ERRORES")
+            for y in errores:
+                error = archivo.getElementsByTagName('ERROR')
+                posicion = 0
+                for w in error:
+                    etiquetacodigo = archivo.getElementsByTagName('CODIGO')
+                    codigo = etiquetacodigo[posicion].firstChild.nodeValue
+                    if len(temp) == 0:
+                        temp.append(codigo)
+                    else:
+                        if codigo in temp:
+                            continue
+                        else:
+                            temp.append(codigo)
+                    # print(columna)
+                    posicion += 1
+        
+
+        dataCode['codigo'] = temp
+        return jsonify(dataCode)
+
+
+
+@app.route('/graficaCodigos', methods=['GET'])
+def datosGraficaCodigo():
+    if request.method == 'GET':
+        dataEstadistica = {}
+        dataCodigos = []
+        dataEstadistica['estadistica'] = []
+        # dataCodigos['codigos'] = []
+        temp = list()
+        ruta = "C:\\Users\\compu\\Desktop\\IPC2 - 2.0\\PROYECTO3\\Frontend\\media\\estadistica.xml"
+        archivo = minidom.parse(ruta)
+        estadistica = archivo.getElementsByTagName('ESTADISTICA')
+
+        for x in estadistica:
+            etiquetafecha = x.getElementsByTagName("FECHA")
+            fecha = etiquetafecha[0].firstChild.nodeValue
+            # print(fecha)
+
+            errores = x.getElementsByTagName("ERROR")
+            for y in errores:
+                etiquetacodigo = y.getElementsByTagName("CODIGO")
+                codigo = etiquetacodigo[0].firstChild.nodeValue
+                etiquetaCantidad = y.getElementsByTagName("CANTIDAD_MENSAJES")
+                cantidad = etiquetaCantidad[0].firstChild.nodeValue
+                # print(codigo)
+                # print(cantidad)
+
+                dataCodigos.append({
+                    'codigo' : codigo,
+                    'cantidad' : cantidad
+                })
+            
+            
+            dataEstadistica['estadistica'].append({
+                'fecha' : fecha,
+                'codigos' : dataCodigos
+            })
+
+
+            dataCodigos = []
+
+
+           
+        return jsonify(dataEstadistica)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

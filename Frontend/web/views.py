@@ -35,7 +35,21 @@ def filtroFecha(request):
 
 
 def filtroCodigo(request):
-    return render(request, 'codigo.html')
+    codigo = {}
+    if request.method == 'GET':
+        listcodigo = []
+        direccion = "http://127.0.0.1:5000/mostrarCodigo"
+        response = requests.get(direccion)
+        data = response.json()
+        
+        # print(data)
+        for x in data['codigo']:
+            listcodigo.append(x)
+
+        codigo['codigo'] = listcodigo
+
+    return render(request, 'codigo.html', codigo)
+
 
 
 # Create your views here.
@@ -83,7 +97,6 @@ def enviar(request):
 
 
 def documentacion(request):
-    
     url = "C:\\Users\\compu\\Desktop\\IPC2 - 2.0\\PROYECTO3\\Documentacion\\documentacionProyecto3.pdf"
     response = FileResponse(open(url, 'rb'), content_type='application/pdf')
     return response
